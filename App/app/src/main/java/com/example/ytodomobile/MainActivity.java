@@ -33,6 +33,11 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, AddActivity.class);
         startActivity(intent);
     }
+    public void openActivityAbout()
+    {
+        Intent intent = new Intent(this, AboutActivity.class);
+        startActivity(intent);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -46,6 +51,9 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.add:
                 openActivityAdd();
+                return true;
+            case R.id.info:
+                openActivityAbout();
                 return true;
         }
         return super.onOptionsItemSelected(item);
