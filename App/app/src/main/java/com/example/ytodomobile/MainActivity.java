@@ -9,13 +9,15 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     private ListView itemsList;
     private ArrayList<String> items;
@@ -31,9 +33,11 @@ public class MainActivity extends AppCompatActivity {
         items = FileBackend.readData(this);
 
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items);
-        itemsList.setAdapter(adapter);
 
-        //itemsList.setOnItemClickListener(this);
+        itemsList.setAdapter(adapter);
+        itemsList.setOnItemClickListener(this);
+
+
     }
     public void openActivityAdd()
     {
@@ -64,5 +68,13 @@ public class MainActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        items.remove(position);
+        adapter.notifyDataSetChanged();
+        FileBackend.writeData(items, this);
+        Toast.makeText(this, "Deleted", Toast.LENGTH_SHORT).show();
     }
 }
