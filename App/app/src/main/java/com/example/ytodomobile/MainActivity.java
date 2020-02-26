@@ -9,24 +9,31 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button add_button;
+    private ListView itemsList;
+    private ArrayList<String> items;
+    private ArrayAdapter<String> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        add_button = (Button) findViewById(R.id.add);
-        //add_button.setOnClickListener(new View.OnClickListener() {
-        //    @Override
-        //    public void onClick(View v) {
-        //        openActivityAdd();
-        //    }
-        //});
+        itemsList = findViewById(R.id.items_list);
+
+        items = FileBackend.readData(this);
+
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items);
+        itemsList.setAdapter(adapter);
+
+        //itemsList.setOnItemClickListener(this);
     }
     public void openActivityAdd()
     {
