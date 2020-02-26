@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         items = FileBackend.readData(this);
 
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items);
+        adapter = new ArrayAdapter<String>(this, R.layout.list_lay, items);
 
         itemsList.setAdapter(adapter);
         itemsList.setOnItemClickListener(this);
